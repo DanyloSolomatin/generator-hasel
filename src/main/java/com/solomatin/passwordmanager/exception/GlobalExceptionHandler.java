@@ -18,7 +18,6 @@ public class GlobalExceptionHandler {
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 errors.put(error.getField(), error.getDefaultMessage()));
 
-        // Повертаємо код 400 Bad Request
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }

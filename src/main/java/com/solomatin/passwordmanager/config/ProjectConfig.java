@@ -10,7 +10,6 @@ import org.springframework.security.web.header.writers.StaticHeadersWriter;
 @Configuration
 public class ProjectConfig {
 
-    // Цей біан виправляє помилку зі скріншоту image_1ad635.png
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -28,12 +27,11 @@ public class ProjectConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/js/**", "/static/**", "/favicon.ico").permitAll()
                         .requestMatchers("/login", "/register", "/api/auth/**").permitAll()
-                        .anyRequest().authenticated() // Закриваємо генератор (index.html)
+                        .anyRequest().authenticated()
                 )
-                // У метод securityFilterChain додайте параметри для formLogin
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .usernameParameter("email") // Кажемо Spring шукати "email" у формі
+                        .usernameParameter("email")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/", true)
                         .permitAll()

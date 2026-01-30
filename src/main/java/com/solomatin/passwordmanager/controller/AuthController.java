@@ -7,9 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/api/auth")
 public class AuthController {
 
@@ -21,12 +22,12 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/register") // Шлях має збігатися з th:action у HTML
+    @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") UserRegistrationDto userDto) {
         try {
             userService.registerUser(userDto);
             logger.info("New user registered: {}", userDto.getEmail());
-            return "redirect:/login?success"; // Після успіху відправляємо на вхід
+            return "redirect:/login?success";
         } catch (Exception e) {
             logger.error("Registration error: {}", e.getMessage());
             return "redirect:/register?error";

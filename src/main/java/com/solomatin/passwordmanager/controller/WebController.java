@@ -18,7 +18,7 @@ public class WebController {
 
     @GetMapping("/")
     public String indexPage() {
-        return "index"; // Повертає index.html
+        return "index";
     }
 
 }
